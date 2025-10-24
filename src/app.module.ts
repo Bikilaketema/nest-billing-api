@@ -7,8 +7,11 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PaymentsModule } from './payments/payments.module';
 import { SusbscriptionsModule } from './susbscriptions/susbscriptions.module';
+import { PlansModule } from './plans/plans.module';
 import * as crypto from 'crypto';
 (global as any).crypto = crypto;
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 
 @Module({
@@ -36,9 +39,17 @@ import * as crypto from 'crypto';
     PaymentsModule,
 
     SusbscriptionsModule,
+
+    PlansModule,
     
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ]
 })
 export class AppModule {}
