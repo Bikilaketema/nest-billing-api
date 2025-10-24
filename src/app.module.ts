@@ -3,6 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { PaymentsModule } from './payments/payments.module';
+import { SusbscriptionsModule } from './susbscriptions/susbscriptions.module';
 import * as crypto from 'crypto';
 (global as any).crypto = crypto;
 
@@ -24,6 +28,14 @@ import * as crypto from 'crypto';
         logging: true,
       }),
     }),
+
+    UsersModule,
+
+    AuthModule,
+
+    PaymentsModule,
+
+    SusbscriptionsModule,
     
   ],
   controllers: [AppController],
